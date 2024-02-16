@@ -1,10 +1,16 @@
+import { Inject } from '@nestjs/common';
+
 import { ServiceCore } from '@core/service.core';
 
 import { IPostRepository, IPostService } from '../interface';
+import { PostInject } from '../post.enum';
 import { CreatePost, FullPost, PostQuery, UpdatePost } from '../post.type';
 
 export class PostService extends ServiceCore implements IPostService {
-  constructor(protected readonly repository: IPostRepository) {
+  constructor(
+    @Inject(PostInject.REPOSITORY)
+    protected readonly repository: IPostRepository,
+  ) {
     super();
   }
 

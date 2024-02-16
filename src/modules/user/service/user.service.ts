@@ -1,15 +1,23 @@
+import { Inject } from '@nestjs/common';
+
 import { ServiceCore } from '@core/service.core';
+import { HashUtil } from '@utils/hash.util';
 
 import { IUserRepository, IUserService } from '../interface';
+import { UserInject } from '../user.enum';
 import { CreateUser, FullUser, UpdateUser, UserQuery } from '../user.type';
 
 export class UserService extends ServiceCore implements IUserService {
-  constructor(protected readonly repository: IUserRepository) {
+  constructor(
+    @Inject(UserInject.REPOSITORY)
+    protected readonly repository: IUserRepository,
+  ) {
     super();
   }
 
   async create(data: CreateUser): Promise<FullUser> {
-    const res = await this.repository.create(data);
+    const password = await HashUtil.hashPassword(data.password);
+    const res = await this.repository.create({ ...data, password });
 
     return res;
   }

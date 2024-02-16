@@ -1,0 +1,2 @@
+### GET POST LIST
+GET {{apiUrl}}/v1/posts

@@ -58,12 +58,8 @@ export class HashUtil {
     return crypto.randomUUID();
   }
 
-  static hashPassword(password?: string): Promise<string | null> {
+  static hashPassword(password: string): Promise<string> {
     return new Promise((resolve, reject) => {
-      if (!password) {
-        return resolve(null);
-      }
-
       const salt = crypto.randomBytes(SALT_KEY_LENGTH).toString('hex');
 
       crypto.scrypt(password, salt, HASH_KEY_LENGTH, (err, derivedKey) => {

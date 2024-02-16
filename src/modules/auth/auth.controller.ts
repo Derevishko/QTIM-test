@@ -37,9 +37,9 @@ export class AuthController extends ControllerCore {
     @AjvBody(authSchema.refreshToken())
     { refreshToken }: RefreshTokenRequestDto,
   ) {
-    const res = await this.service.refreshTokens({ refreshToken });
+    const data = await this.service.refreshTokens({ refreshToken });
 
-    return res;
+    return { data };
   }
 
   @Post('signin')
@@ -50,17 +50,17 @@ export class AuthController extends ControllerCore {
     description: 'Required email.',
   })
   @ApiBody({ type: SignInRequestDto })
-  async signIn(@AjvBody(authSchema.signin()) body: SignInRequestDto) {
-    const res = await this.service.signin(body);
+  async signin(@AjvBody(authSchema.signin()) body: SignInRequestDto) {
+    const data = await this.service.signin(body);
 
-    return res;
+    return { data };
   }
 
   @Post('signup')
   @ApiOperation({ summary: 'Create new customer' })
   @ApiBody({ type: CreateUserDto })
   @ApiCreatedResponse()
-  async signUp(@AjvBody(authSchema.signup()) body: CreateUserDto) {
+  async signup(@AjvBody(authSchema.signup()) body: CreateUserDto) {
     await this.service.signup(body);
   }
 }

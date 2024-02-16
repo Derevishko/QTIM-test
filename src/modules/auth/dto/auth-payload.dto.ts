@@ -1,19 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude, Expose } from 'class-transformer';
 
-import { TokenType } from '@common/enums';
+import { TokensDto } from './tokens.dto';
+import { UserPayloadDto } from './user-payload.dto';
 
 @Exclude()
 export class AuthPayloadDto {
   @Expose()
-  @ApiProperty()
-  accessToken!: string;
+  @ApiProperty({ type: () => TokensDto })
+  tokens!: TokensDto;
 
   @Expose()
-  @ApiProperty()
-  refreshToken!: string;
-
-  @Expose()
-  @ApiProperty()
-  type!: TokenType;
+  @ApiProperty({ type: () => UserPayloadDto })
+  user!: UserPayloadDto;
 }

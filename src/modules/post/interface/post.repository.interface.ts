@@ -1,6 +1,12 @@
 import { SqlContext } from '@common/types';
 
-import { CreatePost, FullPost, PostOptions, PostQuery } from '../post.type';
+import {
+  CreatePost,
+  FullPost,
+  PostOptions,
+  PostQuery,
+  UpdatePost,
+} from '../post.type';
 
 export interface IPostRepository {
   create(body: CreatePost, ctx?: SqlContext): Promise<FullPost>;
@@ -13,5 +19,5 @@ export interface IPostRepository {
   ): Promise<[FullPost[], number]>;
   getOne(query: PostQuery, ctx?: SqlContext): Promise<FullPost | null>;
   getOneWithException(query: PostQuery, ctx?: SqlContext): Promise<FullPost>;
-  update(query: PostQuery, body: CreatePost, ctx?: SqlContext): Promise<void>;
+  update(query: PostQuery, body: UpdatePost, ctx?: SqlContext): Promise<void>;
 }

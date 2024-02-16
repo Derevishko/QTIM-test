@@ -1,7 +1,15 @@
-### CREATE USER
+### SINGUP
 POST {{apiUrl}}/v1/auth/signup
 
 {
   "email": "test@liam.moc",
-  "password": "12345678"
+  "password": "Aa12345678"
+}
+
+### SIGNIN
+POST {{apiUrl}}/v1/auth/signin
+
+{
+  "email": "test@liam.moc",
+  "password": "Aa12345678"
 }

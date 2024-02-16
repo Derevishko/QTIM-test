@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { DataSource, EntityTarget, ObjectLiteral, Repository } from 'typeorm';
 
+import { ServiceOptionToSqlAdapter } from '@common/adapter';
 import { LoggerCtx } from '@common/enums';
 import { OptionsType, QueryType, SqlContext } from '@common/types';
 
@@ -51,7 +52,10 @@ export class RepositoryCore<E extends ObjectLiteral = any> {
       const entity = ctx?.entity || this.entity;
       const manager = ctx?.manager || this.orm.manager;
 
-      const res = await manager.count(entity, { where: query });
+      const res = await manager.count(
+        entity,
+        new ServiceOptionToSqlAdapter<E>({ query }),
+      );
 
       return res;
     } catch (err) {
@@ -65,7 +69,10 @@ export class RepositoryCore<E extends ObjectLiteral = any> {
       const manager = ctx?.manager || this.orm.manager;
 
       // TODO: add adapter
-      const res = await manager.find(entity, { where: options.query });
+      const res = await manager.find<E>(
+        entity,
+        new ServiceOptionToSqlAdapter<E>(options),
+      );
 
       return res;
     } catch (err) {
@@ -81,8 +88,10 @@ export class RepositoryCore<E extends ObjectLiteral = any> {
       const entity = ctx?.entity || this.entity;
       const manager = ctx?.manager || this.orm.manager;
 
-      // TODO: add adapter
-      const res = await manager.findAndCount(entity, { where: options.query });
+      const res = await manager.findAndCount<E>(
+        entity,
+        new ServiceOptionToSqlAdapter<E>(options),
+      );
 
       return res;
     } catch (err) {
@@ -95,7 +104,10 @@ export class RepositoryCore<E extends ObjectLiteral = any> {
       const entity = ctx?.entity || this.entity;
       const manager = ctx?.manager || this.orm.manager;
 
-      const res = await manager.findOne(entity, { where: query });
+      const res = await manager.findOne<E>(
+        entity,
+        new ServiceOptionToSqlAdapter<E>({ query }),
+      );
 
       return res;
     } catch (err) {
@@ -108,7 +120,10 @@ export class RepositoryCore<E extends ObjectLiteral = any> {
       const entity = ctx?.entity || this.entity;
       const manager = ctx?.manager || this.orm.manager;
 
-      const res = await manager.findOneOrFail(entity, { where: query });
+      const res = await manager.findOneOrFail<E>(
+        entity,
+        new ServiceOptionToSqlAdapter<E>({ query }),
+      );
 
       return res;
     } catch (err) {
@@ -131,6 +146,7 @@ export class RepositoryCore<E extends ObjectLiteral = any> {
   }
 
   protected handleError(err: unknown): never {
+    console.log(err);
     if (
       (err as Error)?.name === 'EntityNotFound' ||
       (err as Error)?.name === 'EntityNotFoundError'
