@@ -14,11 +14,11 @@ export const AppDataSource = new DataSource({
   database: <string>process.env.DB_NAME,
   migrations:
     process.env.NODE_ENV === EnvToken.SEED
-      ? [resolve('libs/db/src/seed/*{.ts,.js}')]
-      : [resolve('libs/db/src/migration/*{.ts,.js}')],
+      ? [resolve('src/db/seed/*{.ts,.js}')]
+      : [resolve('src/db/migration/*{.ts,.js}')],
   migrationsTableName:
     process.env.NODE_ENV === EnvToken.SEED ? 'seeds' : 'migrations',
-  entities: [resolve('apps/api/src/modules/**/*.entity{.ts,.js}')],
+  entities: [resolve('src/modules/**/*.entity{.ts,.js}')],
   synchronize: false,
   logging: (process.env.DB_LOG_ENABLED ?? false) as boolean,
   // TODO: add ssl

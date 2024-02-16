@@ -1,0 +1,7 @@
+### CREATE USER
+POST {{apiUrl}}/v1/auth/signup
+
+{
+  "email": "test@liam.moc",
+  "password": "12345678"
+}

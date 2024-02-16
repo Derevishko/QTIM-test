@@ -1,0 +1,71 @@
+{
+  "rest-client.environmentVariables": {
+    "local": {
+      "host": "http://127.0.0.1:3000",
+      "apiUrl": "http://127.0.0.1:3000/api"
+    }
+  },
+  "rest-client.defaultHeaders": {
+    "Content-Type": "application/json"
+  },
+  "rest-client.rememberCookiesForSubsequentRequests": false,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.run": "onSave",
+  "npm.exclude": ["**/dist"],
+  "todohighlight.isEnable": true,
+  "todohighlight.isCaseSensitive": true,
+  "todohighlight.keywords": [
+    "OPTIMIZE:",
+    "HACK:",
+    "DEBUG:",
+    {
+      "text": "BUG:",
+      "color": "#ecf0f1",
+      "backgroundColor": "firebrick",
+      "isWholeLine": false,
+      "regex": {
+        "pattern": "(?<=^|\"|\\s)BUG[:]?(?!\\w)"
+      }
+    },
+    {
+      "text": "REVIEW:",
+      "color": "#ecf0f1",
+      "backgroundColor": "#9980FA",
+      "isWholeLine": false,
+      "regex": {
+        "pattern": "(?<=^|\"|\\s)REVIEW[:]?(?!\\w)"
+      }
+    },
+    {
+      "text": "NOTE:",
+      "color": "#ecf0f1",
+      "backgroundColor": "#0BB710",
+      "isWholeLine": false,
+      "regex": {
+        "pattern": "(?<=^|\"|\\s)NOTE[:]?(?!\\w)"
+      }
+    }
+  ],
+  "todohighlight.defaultStyle": {
+    "color": "#2196D2",
+    "backgroundColor": "none",
+    "cursor": "pointer"
+  },
+  "todohighlight.exclude": [
+    "**/.devcontainer/**",
+    "**/.git/**",
+    "**/.github/**",
+    "**/.vscode/**",
+    "**/.husky/**",
+    "**/coverage/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/docs/**",
+    "**/http/**",
+    "**/node_modules/**",
+    "**/templates/**"
+  ]
+}
