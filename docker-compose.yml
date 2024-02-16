@@ -1,0 +1,41 @@
+version: '3.2'
+services:
+  redis:
+    image: redis:7
+    container_name: qtim_redis
+    networks:
+      - qtim-deploy
+    ports:
+      - ${REDIS_PORT}:6379
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15
+    container_name: qtim_db
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    environment:
+      TZ: 'UTC'
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - qtim-deploy
+    ports:
+      - ${DB_PORT}:5432
+    restart: unless-stopped
+
+
+volumes:
+  redis-data:
+    driver: local
+  postgresql-data:
+    driver: local
+ 
+
+networks:
+  qtim-deploy:
+    name: qtim-deploy
