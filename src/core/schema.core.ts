@@ -1,8 +1,41 @@
+import { INTEGER_SCHEMA } from '@common/constants';
 import { AjvFormatKey, SortBy } from '@common/enums';
 import { JsonSchemaProp, SchemaOption } from '@common/types';
 
 export class SchemaCore {
   constructor(private readonly moduleName = 'common') {}
+
+  protected getArrayInteger(key: string): JsonSchemaProp {
+    return {
+      [key]: {
+        anyOf: [
+          {
+            type: 'array',
+            minItems: 1,
+            uniqueItems: true,
+            items: { ...INTEGER_SCHEMA, minimum: 1 },
+          },
+          { ...INTEGER_SCHEMA, minimum: 1 },
+        ],
+      },
+    };
+  }
+
+  protected getArrayString(key: string): JsonSchemaProp {
+    return {
+      [key]: {
+        anyOf: [
+          {
+            type: 'array',
+            minItems: 1,
+            uniqueItems: true,
+            items: { type: 'string' },
+          },
+          { type: 'string' },
+        ],
+      },
+    };
+  }
 
   protected getDate(key: string): JsonSchemaProp {
     return {

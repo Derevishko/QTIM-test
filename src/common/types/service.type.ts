@@ -6,12 +6,12 @@ export type QueryCtx<T extends object> = {
   limit?: number;
   page?: number;
   sort?: SortType<T>;
-  user: IdObject;
+  user?: UserPayload;
 };
 
 export type Sort = 'ASC' | 'DESC';
 export type SortType<T extends object> = Partial<Record<keyof T, Sort>>;
 
-export type OptionsType<T extends object> = {
+export type OptionsType<T extends object = object> = {
   query: QueryType<T>;
 } & Omit<QueryCtx<T>, 'user'>;

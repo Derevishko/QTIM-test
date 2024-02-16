@@ -6,7 +6,7 @@ type JwtPayload = {
   jti: string;
   sub: Id;
   typ: string;
-};
+} & UserPayload;
 
 type PaginationCtx = {
   limit: number;
