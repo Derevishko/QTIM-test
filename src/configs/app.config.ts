@@ -1,8 +1,8 @@
 import { registerAs } from '@nestjs/config';
 
-import { ConfigToken, EnvToken } from '@common/enum';
+import { ConfigToken, EnvToken } from '@common/enums';
 import { AppConfigType, ConfigData } from '@common/types';
-import { ConfigUtil } from '@utils/config.utils';
+import { ConfigUtil } from '@utils/config.util';
 
 export const AppConfig = registerAs(ConfigToken.APP, () => {
   const config: ConfigData<AppConfigType> = {

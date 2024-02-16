@@ -1,6 +1,6 @@
 import Joi, { SchemaMap } from 'joi';
 
-import { ConfigToken } from '@common/enum';
+import { ConfigToken } from '@common/enums';
 import { ConfigData, ConfigProps } from '@common/types';
 
 export class ConfigUtil {

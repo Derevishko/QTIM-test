@@ -4,7 +4,7 @@ import { Module } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { EnvToken } from '@common/enum';
+import { EnvToken } from '@common/enums';
 import { AppConfig } from '@configs/app.config';
 import { DbConfig } from '@configs/db.config';
 
@@ -34,8 +34,6 @@ import { Logger } from './typeorm/logger';
         ) && {
           logger: new Logger(),
         }),
-        // TODO: add cache
-        // TODO: add ssl
       }),
     }),
   ],

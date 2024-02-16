@@ -1,7 +1,7 @@
 import { Logger as NestLogger } from '@nestjs/common';
 import { Logger as TypeOrmLogger } from 'typeorm';
 
-import { LoggerCtx } from '@common/enum';
+import { LoggerCtx } from '@common/enums';
 
 export class Logger implements TypeOrmLogger {
   private readonly logger = new NestLogger(LoggerCtx.SQL);

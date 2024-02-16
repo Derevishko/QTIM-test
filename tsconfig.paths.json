@@ -4,6 +4,7 @@
       "@common/*": ["./src/common/*"],
       "@configs/*": ["./src/configs/*"],
       "@core/*": ["./src/core/*"],
+      "@db/*": ["./src/db/*"],
       "@modules/*": ["./src/modules/*"],
       "@providers/*": ["./src/providers/*"],
       "@utils/*": ["./src/utils/*"],

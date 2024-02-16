@@ -2,7 +2,7 @@ export type QueryType<T extends object> = Partial<T>;
 export type CreateType<T extends object> = Partial<T>;
 export type UpdateType<T extends object> = Partial<T>;
 
-export type QueryCtx<T> = {
+export type QueryCtx<T extends object> = {
   limit?: number;
   page?: number;
   sort?: SortType<T>;

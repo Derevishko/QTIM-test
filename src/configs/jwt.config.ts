@@ -1,8 +1,8 @@
 import { registerAs } from '@nestjs/config';
 
-import { ConfigToken } from '@common/enum';
+import { ConfigToken } from '@common/enums';
 import { ConfigData, JwtConfigType, JwtType } from '@common/types';
-import { ConfigUtil } from '@utils/config.utils';
+import { ConfigUtil } from '@utils/config.util';
 
 export const JwtConfig = registerAs<JwtConfigType>(ConfigToken.JWT, () => {
   const accessTokenConfig: ConfigData<JwtType> = {

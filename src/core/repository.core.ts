@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { DataSource, EntityTarget, ObjectLiteral, Repository } from 'typeorm';
 
-import { LoggerCtx } from '@common/enum';
+import { LoggerCtx } from '@common/enums';
 import { OptionsType, QueryType, SqlContext } from '@common/types';
 
 export class RepositoryCore<E extends ObjectLiteral = any> {
@@ -66,6 +66,23 @@ export class RepositoryCore<E extends ObjectLiteral = any> {
 
       // TODO: add adapter
       const res = await manager.find(entity, { where: options.query });
+
+      return res;
+    } catch (err) {
+      this.handleError(err);
+    }
+  }
+
+  async getListAndCount(
+    options: OptionsType<E>,
+    ctx?: SqlContext,
+  ): Promise<[E[], number]> {
+    try {
+      const entity = ctx?.entity || this.entity;
+      const manager = ctx?.manager || this.orm.manager;
+
+      // TODO: add adapter
+      const res = await manager.findAndCount(entity, { where: options.query });
 
       return res;
     } catch (err) {

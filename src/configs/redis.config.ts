@@ -1,8 +1,8 @@
 import { registerAs } from '@nestjs/config';
 
-import { ConfigToken } from '@common/enum';
+import { ConfigToken } from '@common/enums';
 import { ConfigData, RedisConfigType } from '@common/types';
-import { ConfigUtil } from '@utils/config.utils';
+import { ConfigUtil } from '@utils/config.util';
 
 export const RedisConfig = registerAs<RedisConfigType>(
   ConfigToken.REDIS,

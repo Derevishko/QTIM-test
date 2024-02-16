@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule as NestConfigModule } from '@nestjs/config';
 
-import { EnvToken } from '@common/enum';
+import { EnvToken } from '@common/enums';
 
 import { AppConfig } from './app.config';
 import { DbConfig } from './db.config';

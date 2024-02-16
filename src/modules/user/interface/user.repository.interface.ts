@@ -10,12 +10,8 @@ export interface IUserRepository {
   getListAndCount(
     options: UserOptions,
     ctx?: SqlContext,
-  ): Promise<Promise<[FullUser[], number]>>;
+  ): Promise<[FullUser[], number]>;
   getOne(query: UserQuery, ctx?: SqlContext): Promise<FullUser | null>;
   getOneWithException(query: UserQuery, ctx?: SqlContext): Promise<FullUser>;
-  update(
-    query: UserQuery,
-    body: CreateUser,
-    ctx?: SqlContext,
-  ): Promise<FullUser>;
+  update(query: UserQuery, body: CreateUser, ctx?: SqlContext): Promise<void>;
 }

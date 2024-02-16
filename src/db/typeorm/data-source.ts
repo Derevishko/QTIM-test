@@ -3,7 +3,7 @@ import 'dotenv/config';
 
 import { DataSource } from 'typeorm';
 
-import { EnvToken } from '@common/enum';
+import { EnvToken } from '@common/enums';
 
 export const AppDataSource = new DataSource({
   type: (process.env.DB_CLIENT ?? 'postgres') as 'postgres',

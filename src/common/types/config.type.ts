@@ -1,6 +1,6 @@
 import { Schema } from 'joi';
 
-import { EnvToken } from '@common/enum';
+import { EnvToken } from '@common/enums';
 
 import { DbClient } from './sql.type';
 
