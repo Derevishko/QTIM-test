@@ -3,6 +3,7 @@ import {
   ApiBody,
   ApiCreatedResponse,
   ApiOperation,
+  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 
@@ -31,6 +32,7 @@ export class AuthController extends ControllerCore {
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
   @Dto(AuthPayloadDto)
+  @ApiResponse({ type: () => AuthPayloadDto })
   @ApiOperation({ summary: 'Refresh auth tokens' })
   @ApiBody({ type: RefreshTokenRequestDto, required: false })
   async refreshToken(
@@ -45,6 +47,7 @@ export class AuthController extends ControllerCore {
   @Post('signin')
   @HttpCode(HttpStatus.OK)
   @Dto(AuthPayloadDto)
+  @ApiResponse({ type: () => AuthPayloadDto })
   @ApiOperation({
     summary: 'Logs user into the system by email and password',
     description: 'Required email.',

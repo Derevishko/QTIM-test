@@ -1,5 +1,5 @@
 type UserPayload = {
-  userId: MongoId;
+  userId: Id;
 };
 
 type JwtPayload = {

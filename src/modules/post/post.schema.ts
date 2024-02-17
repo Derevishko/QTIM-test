@@ -15,7 +15,7 @@ class PostSchema extends SchemaCore {
       $id: this.getIdKey('create'),
       type: 'object',
       additionalProperties: false,
-      required: ['name'],
+      required: ['title'],
       properties: this.properties,
     };
   }
@@ -30,9 +30,9 @@ class PostSchema extends SchemaCore {
           type: 'object',
           additionalProperties: false,
           properties: {
-            ...this.getArrayInteger('ids'),
-            ...this.getArrayString('name'),
-            ...this.getArrayString('author.email'),
+            ...this.getArrayInteger('id'),
+            ...this.getArrayString('title'),
+            ...this.getArrayString('authorId'),
             ...this.getDateRange('createdAt'),
           },
         },
@@ -42,7 +42,7 @@ class PostSchema extends SchemaCore {
           properties: {
             ...this.getSortBy('id'),
             ...this.getSortBy('title'),
-            ...this.getSortBy('author.email'),
+            ...this.getSortBy('authorId'),
             ...this.getSortBy('createdAt'),
           },
         },

@@ -1,2 +1,16 @@
+### CREATE POST LIST
+POST {{apiUrl}}/v1/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzYzkxZjNmMC0xYzkwLTRlZWItYTQzNS0xYjcwNTIxNGUzMmIiLCJzdWIiOjMsInR5cCI6IkJlYXJlciIsInVzZXJJZCI6MywiaWF0IjoxNzA4MTgyNzg0LCJleHAiOjE3OTQ1ODI3ODR9.KozAZmWwKbY6l8DhBGotwEHIX49C0KBLqgfrGM9H88E
+
+{
+  "title": "title",
+  "description": "description"
+}
+
 ### GET POST LIST
-GET {{apiUrl}}/v1/posts
+GET {{apiUrl}}/v1/posts/1
+
+### GET POST LIST
+GET {{apiUrl}}/v1/posts?filter[id]=1&filter[id]=2
+# GET {{apiUrl}}/v1/posts?filter[title]=title
+# GET {{apiUrl}}/v1/posts?filter[authorId]=3

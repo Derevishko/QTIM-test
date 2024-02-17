@@ -13,6 +13,7 @@ import {
   ApiOperation,
   ApiParam,
   ApiQuery,
+  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 
@@ -27,9 +28,10 @@ import {
   UserContext,
 } from '@common/decorators';
 import { PageOptionDto } from '@common/dto';
+import { QueryPipe } from '@common/pipes';
 import { ControllerCore } from '@core/controller.core';
 
-import { CreatePostDto, PostDto, UpdatePostDto } from './dto';
+import { CreatePostDto, PostDto, QueryPostDto, UpdatePostDto } from './dto';
 import { IPostService } from './interface';
 import { PostInject } from './post.enum';
 import { postSchema } from './post.schema';
@@ -47,6 +49,7 @@ export class PostController extends ControllerCore {
 
   @Post()
   @Dto(PostDto)
+  @ApiResponse({ type: () => PostDto })
   @Auth()
   @ApiOperation({ summary: 'Create an post' })
   @ApiBody({ type: CreatePostDto })
@@ -55,7 +58,10 @@ export class PostController extends ControllerCore {
     body: CreatePostDto,
     @UserContext() user: UserPayload,
   ) {
-    const data = await this.service.create(body, { user });
+    const data = await this.service.create(
+      { ...body, authorId: user?.userId },
+      { user },
+    );
 
     return { data };
   }
@@ -74,10 +80,11 @@ export class PostController extends ControllerCore {
 
   @Get()
   @Dto(PostDto)
-  @ApiQuery({ type: PageOptionDto })
+  @ApiResponse({ type: () => PostDto })
+  @ApiQuery({ type: QueryPostDto })
   @ApiOperation({ summary: 'Get list of posts' })
   async getList(
-    @AjvQuery(postSchema.getList()) query: PostQuery,
+    @AjvQuery(postSchema.getList(), QueryPipe) query: PostQuery,
     @PageQuery() pagination: PageOptionDto,
     @SortQuery() sort: PostCtx['sort'],
     @UserContext() user?: UserPayload,
@@ -93,6 +100,7 @@ export class PostController extends ControllerCore {
 
   @Get(':id')
   @Dto(PostDto)
+  @ApiResponse({ type: () => PostDto })
   @ApiOperation({ summary: 'Get an post by ID' })
   @ApiParam({ name: 'id', required: true })
   async getOne(
@@ -106,6 +114,7 @@ export class PostController extends ControllerCore {
 
   @Put(':id')
   @Dto(PostDto)
+  @ApiResponse({ type: () => PostDto })
   @Auth()
   @ApiOperation({ summary: 'Update an post' })
   @ApiParam({ name: 'id', required: true })

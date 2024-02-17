@@ -12,9 +12,12 @@ export class PostEntity
   extends BaseCreatedByEntity<FullPost>
   implements FullPost
 {
-  @ManyToOne(() => UserEntity)
-  @JoinColumn({ name: 'createdById' })
+  @ManyToOne(() => UserEntity, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'authorId' })
   author!: FullUser;
+
+  @Column({ type: 'integer' })
+  authorId!: number;
 
   @Column({ type: 'text' })
   description!: string;

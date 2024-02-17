@@ -15,12 +15,19 @@ export class CreatePost1708101640229 implements MigrationInterface {
           { name: 'id', type: 'int', isPrimary: true, isGenerated: true },
           { name: 'title', type: 'varchar' },
           { name: 'description', type: 'text' },
+          { name: 'authorId', type: 'int' },
           { name: 'createdAt', type: 'timestamptz', default: 'now()' },
           { name: 'updatedAt', type: 'timestamptz', default: 'now()' },
           { name: 'createdById', type: 'int', isNullable: true },
           { name: 'updatedById', type: 'int', isNullable: true },
         ],
         foreignKeys: [
+          {
+            columnNames: ['authorId'],
+            referencedTableName: DB_TABLE_USER,
+            referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+          },
           {
             columnNames: ['createdById'],
             referencedTableName: DB_TABLE_USER,
