@@ -75,7 +75,7 @@ export class PostController extends ControllerCore {
     @AjvParams(postSchema.getOne()) { id }: IdObject,
     @UserContext() user: UserPayload,
   ) {
-    await this.service.delete({ id }, { user });
+    await this.service.delete({ id, authorId: user?.userId }, { user });
   }
 
   @Get()
@@ -125,7 +125,11 @@ export class PostController extends ControllerCore {
     body: UpdatePostDto,
     @UserContext() user: UserPayload,
   ) {
-    const data = await this.service.update(query, body, { user });
+    const data = await this.service.update(
+      { ...query, authorId: user?.userId },
+      body,
+      { user },
+    );
 
     return { data };
   }
