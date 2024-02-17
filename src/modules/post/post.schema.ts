@@ -53,7 +53,9 @@ class PostSchema extends SchemaCore {
   getOne(): JsonSchema {
     return {
       $id: this.getIdKey('getOne'),
-      ...this.getInteger('id'),
+      required: ['id'],
+      additionalProperties: false,
+      properties: this.getInteger('id'),
     };
   }
 
