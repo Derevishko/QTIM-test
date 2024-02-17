@@ -27,20 +27,8 @@ export const JwtConfig = registerAs<JwtConfigType>(ConfigToken.JWT, () => {
     },
   };
 
-  const tokenConfig: ConfigData<JwtType> = {
-    secret: {
-      value: process.env.JWT_SECRET_TOKEN,
-      joi: ConfigUtil.schema.string().required(),
-    },
-    expiresIn: {
-      value: process.env.JWT_EXPIRES_IN_TOKEN,
-      joi: ConfigUtil.schema.string().allow(null, '').default('1d'),
-    },
-  };
-
   return {
     accessToken: ConfigUtil.validate(ConfigToken.JWT, accessTokenConfig),
     refreshToken: ConfigUtil.validate(ConfigToken.JWT, refreshTokenConfig),
-    token: ConfigUtil.validate(ConfigToken.JWT, tokenConfig),
   };
 });

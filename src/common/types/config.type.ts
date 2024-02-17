@@ -38,7 +38,6 @@ export type JwtType = {
 export type JwtConfigType = {
   accessToken: JwtType;
   refreshToken: JwtType;
-  token: JwtType;
 };
 
 export type RedisConfigType = {
